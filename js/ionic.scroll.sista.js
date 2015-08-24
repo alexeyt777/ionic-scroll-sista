@@ -203,6 +203,9 @@
            * Called onScroll.  computes coordinates based on scroll position and translates accordingly
            */
           $element.bind('scroll', function (e) {
+            if (e.orignalEvent)
+              e = e.originalEvent;
+              
             //Initializing onScroll prevents the race condition of active/cached headers not being correctly set in time
             if (!cachedHeader || !activeHeader) {
               initElements();
