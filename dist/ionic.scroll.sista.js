@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('jett.ionic.scroll.sista', ['ionic'])
-    .directive('scrollSista', ['$document', '$timeout', '$ionicScrollDelegate', function($document, $timeout, $ionicScrollDelegate) {
+    .directive('scrollSista', function($document, $timeout, $ionicScrollDelegate) {
         var TRANSITION_DELAY = 400;
         var defaultDelay = TRANSITION_DELAY * 2;
         var defaultDuration = TRANSITION_DELAY + 'ms';
@@ -203,6 +203,9 @@
            * Called onScroll.  computes coordinates based on scroll position and translates accordingly
            */
           $element.bind('scroll', function (e) {
+            // Use JQuery originalEvent
+            event = event.originalEvent || event;
+              
             //Initializing onScroll prevents the race condition of active/cached headers not being correctly set in time
             if (!cachedHeader || !activeHeader) {
               initElements();
@@ -232,6 +235,6 @@
 
         }
       }
-    }]);
+    });
 
 })(angular, ionic);
